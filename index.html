@@ -12,15 +12,13 @@
             width: 100%;
             margin: 0;
             padding: 0;
-            background-color: transparent; /* Make body background transparent */
+            background-color: transparent;
         }
         .container {
             max-width: 900px;
-            margin-top: 1rem;
-            margin-bottom: 1rem;
             margin: 1rem auto;
             padding: 1rem;
-            background-color: #f7fafc;
+            background-color: transparent;
             border-radius: 0.75rem;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             width: 100%;
@@ -30,12 +28,13 @@
             margin-bottom: 1rem;
             color: #10b981;
             font-size: 1.5rem;
+            font-weight: bold; /* Make "Zakat Calculator" bold */
         }
         .form-group {
             margin-bottom: 0.7rem;
-            display: flex; /* Enable flexbox for form groups */
+            display: flex;
             flex-direction: column;
-            align-items: flex-start; /* Align labels to the start */
+            align-items: flex-start;
         }
         .form-label {
             display: block;
@@ -43,7 +42,7 @@
             font-weight: 500;
             color: #4a5568;
             margin-bottom: 0.25rem;
-            width: 100%; /* Ensure labels take full width */
+            width: 100%;
         }
         .input-field {
             width: 100%;
@@ -53,7 +52,7 @@
             font-size: 0.9rem;
             color: #4a5568;
             outline: none;
-            transition: border-color 0.15s ease-in-out, shadow-sm 0.15s ease-in-out;
+            transition: border-color 0.15s ease-in-out, shadow-sm 0 0 0 3px rgba(16, 185, 129, 0.2);
         }
         .input-field:focus {
             border-color: #10b981;
@@ -120,37 +119,12 @@
             color: #4a5568;
             text-align: center;
         }
-
-        /* Styles for 2-column layout */
-        @media (min-width: 640px) { /* Apply styles for screens wider than 640px (md breakpoint in Tailwind is 768px, so this is close) */
-            .form-container {
-                display: grid;
-                grid-template-columns: 1fr 1fr; /* 2 columns */
-                gap: 1rem; /* Add some gap between columns */
-            }
-            .form-group {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .form-label {
-                width: 100%;
-                margin-bottom: 0.25rem;
-            }
-            .input-field {
-                width: 100%;
-            }
-            .calculate-button, .reset-button {
-                grid-column: 1 / -1; /* Span both columns */
-            }
-            .result-box{
-                grid-column: 1 / -1;
-            }
-        }
     </style>
 </head>
 <body class="bg-gray-100" style="margin: 0; padding: 0; width: 100%;">
     <div class="container">
-        <h1 class="heading"><b></b>Zakat Calculator</b> by Muslim Hakawati</h1>
+        <h1 class="heading">Zakat Calculator</h1>
+        <p style="text-align: center;"><a href="https://muslimhakawati.blogspot.com/">Muslim Hakawati</a></p>
         <form id="zakatForm" class="form-container">
             <div class="form-group">
                 <label for="goldPrice" class="form-label">Gold Price (per gram)</label>
@@ -212,9 +186,9 @@
             Your Zakat Payable is: <span id="zakatPayable">0</span>
         </div>
         <p class="disclaimer">
-    <strong>📣Disclaimer:</strong>
-    <em>This Zakat calculator is a personal project and is not accredited or endorsed by any specific Islamic organization or authority. The calculations are based on general interpretations of Zakat principles derived from the Quran and Hadith (Zakat is 2.5% of net assets exceeding the Nisab). Users are encouraged to consult with knowledgeable scholars or refer to official sources for definitive guidance on their Zakat obligations.</em>
-</p>
+            <strong>📣Disclaimer:</strong>
+            <em>This Zakat calculator is a personal project and is not accredited or endorsed by any specific Islamic organization or authority. The calculations are based on general interpretations of Zakat principles derived from the Quran and Hadith (Zakat is 2.5% of net assets exceeding the Nisab). Users are encouraged to consult with knowledgeable scholars or refer to official sources for definitive guidance on their Zakat obligations.</em>
+        </p>
     </div>
     <script>
         document.getElementById('zakatForm').addEventListener('submit', function(event) {
@@ -236,7 +210,7 @@
             // Nisab value (in grams of gold - 85 grams is common)
             const nisabGold = 85;
             const totalGoldValue = gold * goldPricePerGram;
-            const totalSilverValue = silver * goldPricePerGram; // Assuming silver price is the same as gold for this example
+            const totalSilverValue = silver * goldPricePerGram;
             // Calculate total zakatable assets
             const totalAssets = totalGoldValue + totalSilverValue + cash + savings + receivables + businessInventory + properties + shares + pensions + otherAssets;
             // Deduct liabilities
