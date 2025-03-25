@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zakat Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #f7fafc;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            width: 100%;
+        }
+        .heading {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #10b981;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-label {
+            display: block;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #4a5568;
+            margin-bottom: 0.5rem;
+        }
+        .input-field {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            border: 1px solid #e2e8f0;
+            font-size: 1rem;
+            color: #4a5568;
+            outline: none;
+            transition: border-color 0.15s ease-in-out, shadow-sm 0.15s ease-in-out;
+        }
+        .input-field:focus {
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+        }
+        .radio-group {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        .radio-label {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #4a5568;
+        }
+        .radio-input {
+            margin-right: 0.5rem;
+        }
+        .calculate-button {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            background-color: #10b981;
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.15s ease-in-out, transform 0.15s ease-in-out;
+        }
+        .calculate-button:hover {
+            background-color: #059669;
+            transform: translateY(-2px);
+        }
+        .result-box {
+            background-color: #edf7ed;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-top: 2rem;
+            border: 1px solid #b7f3d4;
+            text-align: center;
+            font-size: 1.25rem;
+            color: #10b981;
+            font-weight: 600;
+            width: 100%;
+        }
+        .reset-button {
+            margin-top: 1rem;
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            background-color: #e53e3e;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.15s ease-in-out, transform 0.15s ease-in-out;
+        }
+        .reset-button:hover {
+            background-color: #c53030;
+            transform: translateY(-2px);
+        }
+        #zakatPayable {
+            font-size: 1.5rem;
+            color: #10b981;
+        }
+    </style>
+</head>
+<body class="bg-gray-100" style="margin: 0; padding: 0; width: 100%;">
+    <div class="container">
+        <h1 class="heading">Zakat Calculator</h1>
+        <form id="zakatForm">
+            <div class="form-group">
+                <label for="goldPrice" class="form-label">Gold Price per Gram (in your currency)</label>
+                <input type="number" id="goldPrice" name="goldPrice" required class="input-field" placeholder="Enter price per gram">
+            </div>
+            <div class="form-group">
+                <label for="gold" class="form-label">Gold (in grams)</label>
+                <input type="number" id="gold" name="gold" class="input-field" placeholder="Enter amount in grams">
+            </div>
+            <div class="form-group">
+                <label for="silver" class="form-label">Silver (in grams)</label>
+                <input type="number" id="silver" name="silver" class="input-field" placeholder="Enter amount in grams">
+            </div>
+            <div class="form-group">
+                <label for="cash" class="form-label">Cash (in your currency)</label>
+                <input type="number" id="cash" name="cash" class="input-field" placeholder="Enter amount">
+            </div>
+            <div class="form-group">
+                <label for="savings" class="form-label">Savings/Investments</label>
+                <input type="number" id="savings" name="savings" class="input-field" placeholder="Enter amount">
+            </div>
+            <div class="form-group">
+                <label for="receivables" class="form-label">Receivables (Money owed to you)</label>
+                <input type="number" id="receivables" name="receivables" class="input-field" placeholder="Enter amount">
+            </div>
+             <div class="form-group">
+                <label for="businessInventory" class="form-label">Business Inventory Value</label>
+                <input type="number" id="businessInventory" name="businessInventory" class="input-field" placeholder="Enter amount">
+            </div>
+            <div class="form-group">
+                <label for="liabilities" class="form-label">Liabilities (Debts owed by you)</label>
+                <input type="number" id="liabilities" name="liabilities" class="input-field" placeholder="Enter amount">
+            </div>
+            <div class="form-group">
+                <label for="loans" class="form-label">Loans (Personal Loans Owed)</label>
+                <input type="number" id="loans" name="loans" class="input-field" placeholder="Enter amount">
+            </div>
+            <div class="form-group">
+                <label for="properties" class="form-label">Properties (held for investment)</label>
+                <input type="number" id="properties" name="properties" class="input-field" placeholder="Enter value">
+            </div>
+            <div class="form-group">
+                <label for="shares" class="form-label">Shares/Stocks (Investment Value)</label>
+                <input type="number" id="shares" name="shares" class="input-field" placeholder="Enter value">
+            </div>
+            <div class="form-group">
+                <label for="pensions" class="form-label">Pensions (Savings Value)</label>
+                <input type="number" id="pensions" name="pensions" class="input-field" placeholder="Enter value">
+            </div>
+            <div class="form-group">
+                <label for="otherAssets" class="form-label">Other Assets (e.g., Livestock, etc.)</label>
+                <input type="number" id="otherAssets" name="otherAssets" class="input-field" placeholder="Enter value">
+            </div>
+            <button type="submit" class="calculate-button">Calculate Zakat</button>
+            <button type="reset" class="reset-button">Reset</button>
+        </form>
+        <div id="result" class="result-box" style="display: none;">
+            <p id="zakatMessage"></p>
+            Your Zakat Payable is: <span id="zakatPayable">0</span>
+        </div>
+    </div>
+    <script>
+        document.getElementById('zakatForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Get input values
+            const goldPricePerGram = parseFloat(document.getElementById('goldPrice').value) || 0;
+            const gold = parseFloat(document.getElementById('gold').value) || 0;
+            const silver = parseFloat(document.getElementById('silver').value) || 0;
+            const cash = parseFloat(document.getElementById('cash').value) || 0;
+            const savings = parseFloat(document.getElementById('savings').value) || 0;
+            const receivables = parseFloat(document.getElementById('receivables').value) || 0;
+            const businessInventory = parseFloat(document.getElementById('businessInventory').value) || 0;
+            const liabilities = parseFloat(document.getElementById('liabilities').value) || 0;
+            const loans = parseFloat(document.getElementById('loans').value) || 0;
+            const properties = parseFloat(document.getElementById('properties').value) || 0;
+            const shares = parseFloat(document.getElementById('shares').value) || 0;
+            const pensions = parseFloat(document.getElementById('pensions').value) || 0;
+            const otherAssets = parseFloat(document.getElementById('otherAssets').value) || 0;
+            // Nisab value (in grams of gold - 85 grams is common)
+            const nisabGold = 85;
+            const totalGoldValue = gold * goldPricePerGram;
+            const totalSilverValue = silver * goldPricePerGram; // Assuming silver price is the same as gold for this example
+            // Calculate total zakatable assets
+            const totalAssets = totalGoldValue + totalSilverValue + cash + savings + receivables + businessInventory + properties + shares + pensions + otherAssets;
+            // Deduct liabilities
+            const netAssets = totalAssets - liabilities - loans;
+            // Check if net assets are above nisab
+            const isAboveNisab = netAssets >= (nisabGold * goldPricePerGram);
+            let zakatPayable = 0;
+            let message = "";
+            if (isAboveNisab) {
+                zakatPayable = netAssets * 0.025; // 2.5% Zakat
+                message = "You are required to pay Zakat.";
+            } else {
+                message = "Your assets are below the Nisab value. You are not required to pay Zakat.";
+            }
+            // Display result
+            const resultElement = document.getElementById('result');
+            const zakatPayableElement = document.getElementById('zakatPayable');
+            const zakatMessageElement = document.getElementById('zakatMessage');
+            zakatPayableElement.textContent = zakatPayable.toFixed(2);
+            zakatMessageElement.textContent = message;
+            resultElement.style.display = 'block';
+        });
+        document.getElementById('zakatForm').addEventListener('reset', function() {
+            document.getElementById('result').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
