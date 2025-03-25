@@ -171,7 +171,7 @@
                 <input type="number" id="silver" name="silver" class="input-field" placeholder="Enter grams">
             </div>
             <div class="form-group">
-                <label for="cash" class="form-label">Cash on Hand</label>
+                <label for="cash" class="form-label">Cash</label>
                 <input type="number" id="cash" name="cash" class="input-field" placeholder="Enter amount">
             </div>
             <div class="form-group">
@@ -237,14 +237,20 @@
 
             // Nisab value (in grams of gold - 85 grams is common)
             const nisabGold = 85;
-            const totalGoldValue = gold * goldPricePerGram;
-            const totalSilverValue = silver * goldPricePerGram;
+            // Use a default gold price if the user doesn't provide one.  Important for the case where goldPricePerGram is 0
+            const defaultGoldPrice = 100; // You can adjust this default value as needed
+            const goldPrice = goldPricePerGram || defaultGoldPrice;
+
+            const totalGoldValue = gold * goldPrice;
+            const totalSilverValue = silver * goldPrice;
             // Calculate total zakatable assets
             const totalAssets = totalGoldValue + totalSilverValue + cash + savings + receivables + properties + shares + pensions + otherAssets;
             // Deduct liabilities
             const netAssets = totalAssets - liabilities - loans;
             // Check if net assets are above nisab
-            const isAboveNisab = netAssets >= (nisabGold * goldPricePerGram);
+            const nisabValue = nisabGold * goldPrice;
+            const isAboveNisab = netAssets >= nisabValue;
+
             let zakatPayable = 0;
             let message = "";
             if (isAboveNisab) {
