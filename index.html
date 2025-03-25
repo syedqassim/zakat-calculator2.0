@@ -16,7 +16,7 @@
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 1rem; /* Reduced padding */
+            padding: 1rem;
             background-color: #f7fafc;
             border-radius: 0.75rem;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -24,26 +24,30 @@
         }
         .heading {
             text-align: center;
-            margin-bottom: 1rem; /* Reduced margin */
+            margin-bottom: 1rem;
             color: #10b981;
-            font-size: 1rem; /* Reduced font size */
+            font-size: 1.5rem;
         }
         .form-group {
-            margin-bottom: 1rem; /* Reduced margin */
+            margin-bottom: 1rem;
+            display: flex; /* Enable flexbox for form groups */
+            flex-direction: column;
+            align-items: flex-start; /* Align labels to the start */
         }
         .form-label {
             display: block;
-            font-size: 0.9rem; /* Reduced font size */
+            font-size: 0.9rem;
             font-weight: 500;
             color: #4a5568;
-            margin-bottom: 0.25rem; /* Reduced margin */
+            margin-bottom: 0.25rem;
+            width: 100%; /* Ensure labels take full width */
         }
         .input-field {
             width: 100%;
-            padding: 0.5rem; /* Reduced padding */
+            padding: 0.5rem;
             border-radius: 0.375rem;
             border: 1px solid #e2e8f0;
-            font-size: 0.6rem; /* Reduced font size */
+            font-size: 0.9rem;
             color: #4a5568;
             outline: none;
             transition: border-color 0.15s ease-in-out, shadow-sm 0.15s ease-in-out;
@@ -54,72 +58,91 @@
         }
         .radio-group {
             display: flex;
-            gap: 0.5rem; /* Reduced gap */
+            gap: 0.5rem;
             align-items: center;
         }
         .radio-label {
-            font-size: 0.6rem; /* Reduced font size */
+            font-size: 0.9rem;
             font-weight: 500;
             color: #4a5568;
         }
         .radio-input {
-            margin-right: 0.25rem; /* Reduced margin */
+            margin-right: 0.25rem;
         }
-        .calculate-button {
+        .calculate-button, .reset-button {
             width: 100%;
             padding: 0.75rem;
             border-radius: 0.375rem;
-            background-color: #10b981;
-            color: white;
-            font-size: 0.9rem; /* Reduced font-size */
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.15s ease-in-out, transform 0.15s ease-in-out;
-        }
-        .calculate-button:hover {
-            background-color: #059669;
-            transform: translateY(-2px);
-        }
-        .result-box {
-            background-color: #edf7ed;
-            padding: 1rem; /* Reduced padding */
-            border-radius: 0.75rem;
-            margin-top: 1rem; /* Reduced margin */
-            border: 1px solid #b7f3d4;
-            text-align: center;
-            font-size: 0.9rem; /* Reduced font size */
-            color: #10b981;
-            font-weight: 600;
-            width: 100%;
-        }
-        .reset-button {
-            margin-top: 1rem;
-            width: 100%;
-            padding: 0.75rem;
-            border-radius: 0.375rem;
-            background-color: #e53e3e;
             color: white;
             font-size: 1rem;
             font-weight: 600;
             border: none;
             cursor: pointer;
             transition: background-color 0.15s ease-in-out, transform 0.15s ease-in-out;
+            margin-top: 1rem;
+        }
+        .calculate-button {
+            background-color: #10b981;
+        }
+        .calculate-button:hover {
+            background-color: #059669;
+            transform: translateY(-2px);
+        }
+        .reset-button {
+            background-color: #e53e3e;
         }
         .reset-button:hover {
             background-color: #c53030;
             transform: translateY(-2px);
         }
-        #zakatPayable {
-            font-size: 1rem; /* Reduced font size */
+        .result-box {
+            background-color: #edf7ed;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            margin-top: 1rem;
+            border: 1px solid #b7f3d4;
+            text-align: center;
+            font-size: 1rem;
             color: #10b981;
+            font-weight: 600;
+            width: 100%;
+        }
+        #zakatPayable {
+            font-size: 1.25rem;
+            color: #10b981;
+        }
+
+        /* Styles for 2-column layout */
+        @media (min-width: 640px) { /* Apply styles for screens wider than 640px (md breakpoint in Tailwind is 768px, so this is close) */
+            .form-container {
+                display: grid;
+                grid-template-columns: 1fr 1fr; /* 2 columns */
+                gap: 1rem; /* Add some gap between columns */
+            }
+            .form-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .form-label {
+                width: 100%;
+                margin-bottom: 0.25rem;
+            }
+            .input-field {
+                width: 100%;
+            }
+            .calculate-button, .reset-button {
+                grid-column: 1 / -1; /* Span both columns */
+            }
+            .result-box{
+                grid-column: 1 / -1;
+            }
         }
     </style>
 </head>
 <body class="bg-gray-100" style="margin: 0; padding: 0; width: 100%;">
     <div class="container">
         <h1 class="heading">Zakat Calculator</h1>
-        <form id="zakatForm">
+        <form id="zakatForm" class="form-container">
             <div class="form-group">
                 <label for="goldPrice" class="form-label">Gold Price (per gram)</label>
                 <input type="number" id="goldPrice" name="goldPrice" required class="input-field" placeholder="Enter price">
