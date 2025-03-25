@@ -228,7 +228,6 @@
             const cash = parseFloat(document.getElementById('cash').value) || 0;
             const savings = parseFloat(document.getElementById('savings').value) || 0;
             const receivables = parseFloat(document.getElementById('receivables').value) || 0;
-            const businessInventory = parseFloat(document.getElementById('businessInventory').value) || 0;
             const liabilities = parseFloat(document.getElementById('liabilities').value) || 0;
             const loans = parseFloat(document.getElementById('loans').value) || 0;
             const properties = parseFloat(document.getElementById('properties').value) || 0;
@@ -241,7 +240,7 @@
             const totalGoldValue = gold * goldPricePerGram;
             const totalSilverValue = silver * goldPricePerGram;
             // Calculate total zakatable assets
-            const totalAssets = totalGoldValue + totalSilverValue + cash + savings + receivables + businessInventory + properties + shares + pensions + otherAssets;
+            const totalAssets = totalGoldValue + totalSilverValue + cash + savings + receivables + properties + shares + pensions + otherAssets;
             // Deduct liabilities
             const netAssets = totalAssets - liabilities - loans;
             // Check if net assets are above nisab
