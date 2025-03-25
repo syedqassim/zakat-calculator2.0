@@ -183,6 +183,10 @@
                 <input type="number" id="receivables" name="receivables" class="input-field" placeholder="Enter amount">
             </div>
             <div class="form-group">
+                <label for="businessInventory" class="form-label">Inventory Value</label>
+                <input type="number" id="businessInventory" name="businessInventory" class="input-field" placeholder="Enter amount">
+            </div>
+            <div class="form-group">
                 <label for="liabilities" class="form-label">Liabilities</label>
                 <input type="number" id="liabilities" name="liabilities" class="input-field" placeholder="Enter amount">
             </div>
@@ -215,13 +219,13 @@
         </div>
         <p class="disclaimer">
             <strong>📣Disclaimer:</strong>
-            <em>This Zakat calculator is a personal project and is not accredited or endorsed by any specific Islamic organization or authority. The calculations are based on general interpretations of Zakat principles derived from the Quran and Hadith (Zakat is 2.5% of net assets exceeding the Nisab). Users are encouraged to consult with knowledgeable scholars or refer to official sources for definitive guidance on their Zakat obligations.</em>
+            <em>This Zakat calculator is a personal project and is not accredited or endorsed by any specific Islamic organization or authority. The calculations are based on general interpretations of Zakat principles derived from the Quran and Hadith (Zakat is 2.5% of net assets exceeding </em>
         </p>
     </div>
     <script>
         document.getElementById('zakatForm').addEventListener('submit', function(event) {
             event.preventDefault();
-            // Get input values
+            // Get input values, using parseFloat and default value of 0
             const goldPricePerGram = parseFloat(document.getElementById('goldPrice').value) || 0;
             const gold = parseFloat(document.getElementById('gold').value) || 0;
             const silver = parseFloat(document.getElementById('silver').value) || 0;
@@ -235,6 +239,7 @@
             const shares = parseFloat(document.getElementById('shares').value) || 0;
             const pensions = parseFloat(document.getElementById('pensions').value) || 0;
             const otherAssets = parseFloat(document.getElementById('otherAssets').value) || 0;
+
             // Nisab value (in grams of gold - 85 grams is common)
             const nisabGold = 85;
             const totalGoldValue = gold * goldPricePerGram;
